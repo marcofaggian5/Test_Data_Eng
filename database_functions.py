@@ -23,7 +23,7 @@ class DataBase_Management:
     def add_to_databases(self, df):
         # add places info to people
         df = df.merge(self.places, on=self.keys, how='inner').drop_duplicates()
-        # update database with new people
+        # update database with new rows
         self.df = self.df.append(df).drop_duplicates()
         # save new database as excel
         self.df.to_excel("output.xlsx")
@@ -34,7 +34,6 @@ class DataBase_Management:
     def return_json_counting(self, column):
         json_out = self.count_freq_column(column)
         json_out = json_out[['prenom']]
-        # print(json_out['prenom'].sum())
         with open("res_" + column + ".json", "w") as outfile:
             json.dump(json_out['prenom'].to_dict(), outfile)
 

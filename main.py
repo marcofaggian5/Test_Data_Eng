@@ -1,6 +1,5 @@
 import pandas as pd
 from database_functions import DataBase_Management
-import json
 
 if __name__ == '__main__':
     places = pd.read_csv(r'data/lieux.csv').drop_duplicates()
