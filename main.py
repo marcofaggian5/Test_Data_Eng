@@ -1,16 +1,16 @@
-# This is a sample Python script.
+import pandas as pd
+from database_functions import DataBase_Management
+import json
 
-# Press ⇧F10 to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    places = pd.read_csv(r'data/lieux.csv').drop_duplicates()
+    people = pd.read_csv(r'data/people.csv').drop_duplicates()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # create an object that associates the department and the region to data with a 'commune'
+    DB_Func = DataBase_Management(places)
+    # create a database with information about people, and associate to each person region and department
+    DB_Func.add_to_databases(people)
+    # output counting of people for each department
+    DB_Func.return_json_counting('departement')
+    # output counting of people for each region
+    DB_Func.return_json_counting('region')
