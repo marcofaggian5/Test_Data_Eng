@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 
+
 class DataBase_Management:
 
     def __init__(self, places):
